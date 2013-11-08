@@ -31,7 +31,7 @@ public class CustomLog {
 
     public static CustomLog getInstance() {
         if (mInstance == null) {
-            throw new IllegalStateException("Log is not initialized, you need to call CustomLog.initLog");
+            mInstance = new CustomLog("ProjectsException", Log.INFO);
         }
         return mInstance;
     }

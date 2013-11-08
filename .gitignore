@@ -1,0 +1,10 @@
+# Platform settings
+local.properties
+
+# Gradle
+.gradle/
+build/
+
+# Android Studio
+.idea
+*.iml

@@ -2,10 +2,10 @@ package com.projectsexception.util;
 
 import android.content.Context;
 
-import com.google.analytics.tracking.android.EasyTracker;
 import com.google.analytics.tracking.android.ExceptionParser;
 import com.google.analytics.tracking.android.ExceptionReporter;
 import com.google.analytics.tracking.android.GAServiceManager;
+import com.google.analytics.tracking.android.Tracker;
 
 public final class AnalyticsUtil {
 
@@ -13,7 +13,7 @@ public final class AnalyticsUtil {
 
     }
 
-    public static void checkExceptionHandler(Context context, EasyTracker tracker) {
+    public static void checkExceptionHandler(Context context, Tracker tracker) {
         Thread.UncaughtExceptionHandler exceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
         ExceptionParser exceptionParser = null;
         if (exceptionHandler instanceof ExceptionReporter) {

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.projectsexception.utils">
+    package="com.projectsexception.myapplist.utils">
 
-    <application />
+    <uses-sdk
+        android:minSdkVersion="7"/>
 
 </manifest>

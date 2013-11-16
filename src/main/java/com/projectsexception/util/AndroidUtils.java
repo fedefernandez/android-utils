@@ -18,7 +18,9 @@
 
 package com.projectsexception.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -51,7 +53,8 @@ public class AndroidUtils {
     }
     
     public static boolean isGoogleTV(Context context){
-        return context.getPackageManager().hasSystemFeature("com.google.android.tv");
+        PackageManager packageManager = context.getPackageManager();
+        return packageManager != null && packageManager.hasSystemFeature("com.google.android.tv");
     }
 
     /**
@@ -68,8 +71,8 @@ public class AndroidUtils {
     /**
      * Whether there is any network with a usable connection.
      * 
-     * @param context
-     * @return
+     * @param context application context
+     * @return true if is connected
      */
     public static boolean isNetworkConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context
@@ -84,8 +87,8 @@ public class AndroidUtils {
     /**
      * Whether WiFi has an active, usable connection.
      * 
-     * @param context
-     * @return
+     * @param context application context
+     * @return true if is wifi connected
      */
     public static boolean isWifiConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context
@@ -96,5 +99,17 @@ public class AndroidUtils {
             return wifiNetworkInfo.isConnected();
         }
         return false;
+    }
+
+    @SuppressLint("NewApi")
+    public static void copyToClipboard(Context context, String label, String text) {
+        if (isHoneycombOrHigher()) {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText(label, text);
+            clipboard.setPrimaryClip(clip);
+        } else {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(text);
+        }
     }
 }

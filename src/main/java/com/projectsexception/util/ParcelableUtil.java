@@ -2,6 +2,8 @@ package com.projectsexception.util;
 
 import android.os.Parcel;
 
+import java.util.Date;
+
 public final class ParcelableUtil {
 
     private ParcelableUtil() {
@@ -38,6 +40,23 @@ public final class ParcelableUtil {
         Float value = null;
         if (in.readByte() == 1) {
             value = in.readFloat();
+        }
+        return value;
+    }
+
+    public static void writeDate(Parcel dest, Date value) {
+        if (value == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(value.getTime());
+        }
+    }
+
+    public static Date readDate(Parcel in) {
+        Date value = null;
+        if (in.readByte() == 1) {
+            value = new Date(in.readLong());
         }
         return value;
     }

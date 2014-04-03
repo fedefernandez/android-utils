@@ -60,4 +60,21 @@ public final class ParcelableUtil {
         }
         return value;
     }
+
+    public static void writeStringArray(Parcel dest, String[] value) {
+        if (value == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeStringArray(value);
+        }
+    }
+
+    public static String[] readStringArray(Parcel in) {
+        String[] value = null;
+        if (in.readByte() == 1) {
+            value = in.createStringArray();
+        }
+        return value;
+    }
 }

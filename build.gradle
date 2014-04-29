@@ -21,7 +21,7 @@ apply plugin: 'robolectric'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.1'
+    buildToolsVersion '19.0.3'
 
     sourceSets {
         instrumentTest.setRoot('src/test')
@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:support-v4:19.1.+'
 
     androidTestCompile 'org.robolectric:robolectric:2.+'
     androidTestCompile 'junit:junit:4.+'

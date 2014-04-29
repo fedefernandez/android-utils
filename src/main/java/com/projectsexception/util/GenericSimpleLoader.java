@@ -68,8 +68,12 @@ public abstract class GenericSimpleLoader<T> extends AsyncTaskLoader<T> {
     @Override
     protected void onStartLoading() {
         if (mItems != null) {
+            // If we currently have a result available, deliver it
+            // immediately.
             deliverResult(mItems);
         } else {
+            // If the data has changed since the last time it was loaded
+            // or is not currently available, start a load.
             forceLoad();
         }
     }

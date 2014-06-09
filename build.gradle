@@ -1,65 +1,13 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
-        classpath 'com.novoda.gradle:robolectric-plugin:0.0.1-SNAPSHOT'
-    }
+repositories {
+    mavenCentral()
 }
 
-allprojects {
-    repositories {
-        mavenCentral()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    }
-}
-
-apply plugin: 'android-library'
-apply plugin: 'robolectric'
-
-android {
-    compileSdkVersion 19
-    buildToolsVersion '19.0.1'
-
-    sourceSets {
-        instrumentTest.setRoot('src/test')
-    }
-}
+apply plugin: 'java'
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.1'
-
-    androidTestCompile 'org.robolectric:robolectric:2.+'
-    androidTestCompile 'junit:junit:4.+'
+    compile 'com.google.android:android:4.1.1.4'
+    compile 'com.google.android:support-v4:r7'
+    testCompile 'junit:junit:4.+'
 }
 
-task addTest {
-    def src = ['src/test/java']
-    def file = file("android-utils.iml")
-
-    doLast {
-        try {
-            def parsedXml = (new XmlParser()).parse(file)
-            def node = parsedXml.component[1].content[0]
-            src.each {
-                def path = 'file://$MODULE_DIR$/' + "${it}"
-                def set = node.find { it.@url == path }
-                if (set == null) {
-                    new Node(node, 'sourceFolder', ['url': 'file://$MODULE_DIR$/' + "${it}", 'isTestSource': "true"])
-                    def writer = new StringWriter()
-                    new XmlNodePrinter(new PrintWriter(writer)).print(parsedXml)
-                    file.text = writer.toString()
-                }
-            }
-        } catch (FileNotFoundException e) {
-            // nop, iml not found
-        }
-    }
-}
-
-// always do the addtest on prebuild
-gradle.projectsEvaluated {
-    preBuild.dependsOn(addTest)
-}
+version = '1.1'

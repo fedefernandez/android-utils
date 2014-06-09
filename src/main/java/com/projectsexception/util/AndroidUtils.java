@@ -29,7 +29,8 @@ import android.os.Environment;
 public class AndroidUtils {
 
     public static boolean isKitKatOrHigher() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        //return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        return Build.VERSION.SDK_INT >= 19;
     }
 
     public static boolean isJellyBeanOrHigher() {

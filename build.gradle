@@ -3,6 +3,7 @@ repositories {
 }
 
 apply plugin: 'java'
+apply plugin: 'maven'
 
 dependencies {
     compile 'com.google.android:android:4.1.1.4'
@@ -11,3 +12,4 @@ dependencies {
 }
 
 version = '1.1'
+group = 'com.projectsexception'
